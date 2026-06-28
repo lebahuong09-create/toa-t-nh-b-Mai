@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mai ❤️</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Arial,sans-serif;
+background:linear-gradient(180deg,#ff9ecf,#ffe6f2);
+}
+
+.box{
+background:rgba(255,255,255,.9);
+padding:30px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 0 20px #ff7eb3;
+z-index:2;
+}
+
+h1{
+color:#ff2d75;
+margin-bottom:15px;
+}
+
+p{
+margin-bottom:20px;
+font-size:18px;
+line-height:1.7;
+}
+
+button{
+padding:12px 25px;
+margin:10px;
+border:none;
+border-radius:10px;
+font-size:20px;
+cursor:pointer;
+transition:.3s;
+}
+
+#yes{
+background:#ff2d75;
+color:white;
+}
+
+#no{
+background:#777;
+color:white;
+position:absolute;
+}
+
+.heart,.petal{
+position:fixed;
+top:-30px;
+pointer-events:none;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(360deg);
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>💖 Gửi đến Mai (20-03) 💖</h1>
+
+<p>
+Mai à...<br><br>
+Anh thích em rất nhiều.<br>
+Em đồng ý làm người yêu anh nhé? ❤️
+</p>
+
+<button id="yes">Em đồng ý 💕</button>
+
+<button id="no">Không 😝</button>
+
+</div>
+
+<script>const no = document.getElementById("no");
+const yes = document.getElementById("yes");
+
+let noScale = 1;
+let yesScale = 1;
+
+function moveNo(){
+
+no.style.position="fixed";
+
+no.style.left=Math.random()*(window.innerWidth-no.offsetWidth-20)+"px";
+
+no.style.top=Math.random()*(window.innerHeight-no.offsetHeight-20)+"px";
+
+if(noScale>0.25){
+noScale-=0.1;
+no.style.transform="scale("+noScale+")";
+}
+
+yesScale+=0.12;
+yes.style.transform="scale("+yesScale+")";
+}
+
+no.addEventListener("mouseover",moveNo);
+
+no.addEventListener("touchstart",function(e){
+e.preventDefault();
+moveNo();
+});
+
+document.getElementById("yes").onclick=()=>{
+
+document.body.innerHTML=`
+
+<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#ffd6e8;font-family:Arial;text-align:center;flex-direction:column;">
+
+<h1 style="font-size:55px;color:#ff2d75;">💖 Cảm ơn Mai 💖</h1>
+
+<p style="font-size:28px;">
+Anh sẽ luôn trân trọng và yêu thương em ❤️
+</p>
+
+<h2>🌸 Chúng mình cùng viết tiếp câu chuyện này nhé! 🌸</h2>
+
+</div>
+
+`;
+
+firework();
+
+};
+
+function heart(){
+
+let h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML="❤️";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.fontSize=(20+Math.random()*20)+"px";
+
+h.style.animationDuration=(4+Math.random()*4)+"s";
+
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),8000);
+
+}
+
+function petal(){
+
+let p=document.createElement("div");
+
+p.className="petal";
+
+p.innerHTML="🌸";
+
+p.style.left=Math.random()*100+"vw";
+
+p.style.fontSize=(20+Math.random()*20)+"px";
+
+p.style.animationDuration=(5+Math.random()*5)+"s";
+
+document.body.appendChild(p);
+
+setTimeout(()=>p.remove(),9000);
+
+}
+
+setInterval(heart,300);
+
+setInterval(petal,250);
+
+function firework(){
+
+for(let i=0;i<150;i++){
+
+let s=document.createElement("div");
+
+s.innerHTML="💖";
+
+s.style.position="fixed";
+
+s.style.left="50%";
+
+s.style.top="50%";
+
+s.style.fontSize="24px";
+
+s.style.pointerEvents="none";
+
+document.body.appendChild(s);
+
+let a=Math.random()*Math.PI*2;
+
+let d=100+Math.random()*250;
+
+s.animate([
+
+{transform:"translate(0,0)",opacity:1},
+
+{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px)`,opacity:0}
+
+],{
+
+duration:1800
+
+});
+
+setTimeout(()=>s.remove(),1800);
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
